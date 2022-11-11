@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -49,8 +50,8 @@ public class EvreteRuleController {
 
     }
 
-    @GetMapping("/rule1")
-    public List<Customer> executeRule1() throws ExecutionException, InterruptedException {
+    @GetMapping("/rule1/{type}")
+    public List<Customer> executeRule1(@PathVariable String type) throws ExecutionException, InterruptedException, IOException {
 
         final StopWatch stopWatch = new StopWatch();
         stopWatch.start();
@@ -66,11 +67,17 @@ public class EvreteRuleController {
         sessionData.addAll(Arrays.asList(allIUnprocessedInvoices.get().toArray()));
         sessionData.addAll(Arrays.asList(allCustomers.get().toArray()));
 
-        evreteService.rule1()
-                .newStatelessSession()
-                .insert(sessionData)
-                .fire();
-
+        if(type.equals("a")) {
+            evreteService.ruleA()
+                    .newStatelessSession()
+                    .insert(sessionData)
+                    .fire();
+        }else {
+            evreteService.ruleB()
+                    .newStatelessSession()
+                    .insert(sessionData)
+                    .fire();
+        }
         log.info(sessionData.toString());
 
         daoService.updateCustomers(sessionData.stream()

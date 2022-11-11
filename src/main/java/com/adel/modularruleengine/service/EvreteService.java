@@ -8,6 +8,12 @@ import org.evrete.KnowledgeService;
 import org.evrete.api.Knowledge;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 @Component
 @Slf4j
 @AllArgsConstructor
@@ -15,7 +21,7 @@ public class EvreteService {
 
     private final KnowledgeService knowledgeService;
 
-    public Knowledge rule1(){
+    public Knowledge ruleA(){
         return knowledgeService
                 .newKnowledge()
 
@@ -39,6 +45,13 @@ public class EvreteService {
 
                 ;
 
+    }
+
+    public Knowledge ruleB() throws IOException {
+        final URL url = getClass().getClassLoader().getResource("rule1.java");
+        log.info(url.toString());
+        return knowledgeService
+                .newKnowledge("JAVA-SOURCE", url);
     }
 
 }
