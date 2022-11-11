@@ -5,6 +5,7 @@ import org.hibernate.annotations.OptimisticLocking;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @Getter
 @AllArgsConstructor
@@ -23,10 +24,10 @@ public class Customer {
 
     private String name;
 
-    @Builder.Default
-    private BigDecimal walletAmount = BigDecimal.ZERO;
+    private BigDecimal walletAmount;
 
     public void addAmount(final BigDecimal amount){
+        this.walletAmount = Optional.ofNullable(walletAmount).orElse(BigDecimal.ZERO);
         walletAmount = walletAmount.add(amount);
     }
 

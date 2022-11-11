@@ -82,17 +82,11 @@ public class EvreteRuleController {
                     .insert(sessionData)
                     .fire();
         }
+
         log.info(sessionData.toString());
 
-        daoService.updateCustomers(sessionData.stream()
-                .filter(f -> f instanceof Customer)
-                .map(m -> (Customer) m)
-                .collect(Collectors.toList()));
-
-        daoService.updateInvoices(sessionData.stream()
-                                    .filter(f->f instanceof Invoice)
-                                    .map(m->(Invoice) m)
-                                    .collect(Collectors.toList()));
+        daoService.updateInvoices(allIUnprocessedInvoices.get());
+        daoService.updateCustomers(allCustomers.get());
 
         stopWatch.stop();
         log.info("Stopwatch(sec): "+stopWatch.getTotalTimeSeconds());

@@ -50,11 +50,13 @@ public class DaoService {
         return customerRepository.findAll();
     }
 
-    public void updateCustomers(final List<Customer> customers){
-        customerRepository.saveAll(customers);
+    @Transactional
+    public void updateCustomers(List<Customer> customers){
+        customerRepository.saveAllAndFlush(customers);
     }
 
+    @Transactional
     public void updateInvoices(List<Invoice> invoices) {
-        invoiceRepository.saveAll(invoices);
+        invoiceRepository.saveAllAndFlush(invoices);
     }
 }
