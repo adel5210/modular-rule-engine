@@ -19,6 +19,7 @@ public class ruleTemplate {
 
     @{startMethod}
     // ========== @{ruleDescription} ==========
+    // ========== @{_dateRegistered} ==========
     @Rule("@{ruleName}")
     @Where("@{where}")
     public void @{ruleMethodName}(@{conditions}){
@@ -26,6 +27,7 @@ public class ruleTemplate {
     }
 
     @{endMethod}
+    @{_next}
 
     // end of custom code
 
