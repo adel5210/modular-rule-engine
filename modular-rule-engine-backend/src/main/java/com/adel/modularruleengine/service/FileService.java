@@ -74,7 +74,7 @@ public class FileService {
         for (String copyLine : copyCodeLine) {
             if (copyLine.contains(next)) {
                 newCodeLine.addAll(portionCode);
-                newCodeLine.add("// "+next);
+                newCodeLine.add("\t"+"// "+next);
             }else {
                 newCodeLine.add(copyLine);
             }
