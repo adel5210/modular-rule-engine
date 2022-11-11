@@ -71,7 +71,7 @@ public class EvreteRuleController {
         sessionData.addAll(Arrays.asList(allIUnprocessedInvoices.get().toArray()));
         sessionData.addAll(Arrays.asList(allCustomers.get().toArray()));
 
-        if(type.equals("a")) {
+        if(type.equalsIgnoreCase("a")) {
             evreteService.ruleA()
                     .newStatelessSession()
                     .insert(sessionData)
