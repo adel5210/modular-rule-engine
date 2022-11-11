@@ -11,9 +11,14 @@ import java.math.*;
 import java.lang.*;
 import java.util.*;
 import java.time.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 @RuleSet
 public class ruleTemplate {
+
+    private static final Logger log = Logger.getLogger("rule_processor");
 
     // start of custom code
 
@@ -23,6 +28,7 @@ public class ruleTemplate {
     @Rule("@{ruleName}")
     @Where("@{where}")
     public void @{ruleMethodName}(@{conditions}){
+        log.log(Level.INFO, String.valueOf("@{ruleMethodName}"));
         @{statement}
     }
 
