@@ -38,7 +38,7 @@ public class ruleTemplate {
 
     // --> START_String
     // ========== String ==========
-    // ========== 2022-11-11T23:07:31.890496313 ==========
+    // ========== 2022-11-11T23:09:51.532761199 ==========
     @Rule("String")
     @Where("String")
     public void String(String){
@@ -46,7 +46,7 @@ public class ruleTemplate {
         String
     }
     // -->  END_String
-// @{_next}
+	// @{_next}
 
     // end of custom code
 
