@@ -17,5 +17,6 @@ public class RuleAttributes {
     private String parameters;
     private String ruleDescription;
     private String statement;
+    private String _dateRegistered;
 
 }

@@ -1,6 +1,7 @@
 package com.adel.modularruleengine.service;
 
 import com.adel.modularruleengine.dto.RuleAttributes;
+import com.adel.modularruleengine.utility.ResourceUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.util.FileUtil;
@@ -14,6 +15,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,29 +30,11 @@ import java.util.stream.Stream;
 public class FileService {
 
     public void addNewRule(RuleAttributes ruleAttributes) throws IOException {
+        ruleAttributes.set_dateRegistered(LocalDateTime.now().toString());
 
-        final File file = new File("/home/pc7/IdeaProjects/modular-rule-engine/modular-rule-engine-backend/src/main/resources/rule2.java");
-        final Path path = file.toPath();
+        final List<String> codeLines = ResourceUtil.readAllLine("/home/pc7/IdeaProjects/modular-rule-engine/modular-rule-engine-backend/src/main/resources/ruleTemplate.java");
 
-        if (!FileUtil.canReadFile(file)) return;
-
-        final List<String> codeLines = Files.readAllLines(path);
-
-        final Map<String, Object> fields = Arrays.stream(RuleAttributes.class.getDeclaredFields())
-                .map(m -> {
-                    final Field f;
-                    Object value = new Object();
-                    try {
-                        f = ruleAttributes.getClass().getDeclaredField(m.getName());
-                        f.setAccessible(true);
-                        value = f.get(ruleAttributes);
-                    } catch (NoSuchFieldException | IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
-                    return Pair.of(m.getName(), value);
-                })
-                .collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
-//        Modifier.isPrivate(fields[0].getModifiers());
+        final Map<String, Object> fields = ResourceUtil.getFieldsAndValues(ruleAttributes);
 
         final List<String> copyCodeLine = new ArrayList<>();
         final List<String> portionCode = new ArrayList<>();
@@ -72,7 +57,7 @@ public class FileService {
                 }
 
                 final String wrapField = "@{" + field.getKey() + "}";
-                if (line.contains(wrapField)) {
+                if (line.contains(wrapField) ) {
                     line = line.replace(wrapField, field.getValue().toString());
                 }
             }
@@ -95,16 +80,8 @@ public class FileService {
             }
         }
 
-        final FileWriter fileWriter = new FileWriter("/home/pc7/IdeaProjects/modular-rule-engine/modular-rule-engine-backend/src/main/resources/rule2.java");
-        newCodeLine.forEach(newLine -> {
-            try {
-                fileWriter.write(newLine);
-                fileWriter.write("\n");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        fileWriter.close();
+        ResourceUtil.writeAllLines(newCodeLine, "/home/pc7/IdeaProjects/modular-rule-engine/modular-rule-engine-backend/src/main/resources/rule2.java");
+
 
     }
 

@@ -19,11 +19,11 @@ import java.util.logging.Logger;
 public class ruleTemplate {
 
     private static final Logger log = Logger.getLogger("rule_processor");
-    // @{_countRule}
     // start of custom code
 
     /*
     // @{_startMethod}
+    // --> START_@{ruleMethodName}
     // ========== @{ruleDescription} ==========
     // ========== @{_dateRegistered} ==========
     @Rule("@{ruleName}")
@@ -32,33 +32,20 @@ public class ruleTemplate {
         log.log(Level.INFO, String.valueOf("@{ruleMethodName}"));
         @{statement}
     }
+    // -->  END_@{ruleMethodName}
     // @{_endMethod}
     */
 
-    // ========== NONE ==========
-    // ========== @{_dateRegistered} ==========
-    @Rule("ruleOne")
-    @Where("$i==$c")
-    public void ruleOne(String c){
-        log.log(Level.INFO, String.valueOf("ruleOne"));
-        return;
+    // --> START_String
+    // ========== String ==========
+    // ========== 2022-11-11T23:07:31.890496313 ==========
+    @Rule("String")
+    @Where("String")
+    public void String(String){
+        log.log(Level.INFO, String.valueOf("String"));
+        String
     }
-    // ========== NONE ==========
-    // ========== @{_dateRegistered} ==========
-    @Rule("ruleOne")
-    @Where("$i==$c")
-    public void ruleOne(String c){
-        log.log(Level.INFO, String.valueOf("ruleOne"));
-        return;
-    }
-    // ========== NONE ==========
-    // ========== @{_dateRegistered} ==========
-    @Rule("ruleOne")
-    @Where("$i==$c")
-    public void ruleOne(String c){
-        log.log(Level.INFO, String.valueOf("ruleOne"));
-        return;
-    }
+    // -->  END_String
 // @{_next}
 
     // end of custom code

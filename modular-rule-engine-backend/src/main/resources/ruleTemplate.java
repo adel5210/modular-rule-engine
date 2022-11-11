@@ -19,7 +19,6 @@ import java.util.logging.Logger;
 public class ruleTemplate {
 
     private static final Logger log = Logger.getLogger("rule_processor");
-    // @{_countRule}
     // start of custom code
 
     /*
