@@ -25,8 +25,8 @@ import java.util.stream.Stream;
 @RestController
 @AllArgsConstructor
 @Slf4j
-@RequestMapping("/api/v1")
-public class EvreteRuleController {
+@RequestMapping("/api/v1/rule1")
+public class Rule1TestController {
 
     private final DaoService daoService;
     private final EvreteService evreteService;
@@ -54,7 +54,7 @@ public class EvreteRuleController {
 
     }
 
-    @GetMapping("/rule1/{type}")
+    @GetMapping("/{type}")
     public List<Customer> executeRule1(@PathVariable String type) throws ExecutionException, InterruptedException, IOException {
 
         final StopWatch stopWatch = new StopWatch();

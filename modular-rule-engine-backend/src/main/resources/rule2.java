@@ -35,7 +35,31 @@ public class ruleTemplate {
     // @{_endMethod}
     */
 
-    // @{_next}
+    // ========== NONE ==========
+    // ========== @{_dateRegistered} ==========
+    @Rule("ruleOne")
+    @Where("$i==$c")
+    public void ruleOne(String c){
+        log.log(Level.INFO, String.valueOf("ruleOne"));
+        return;
+    }
+    // ========== NONE ==========
+    // ========== @{_dateRegistered} ==========
+    @Rule("ruleOne")
+    @Where("$i==$c")
+    public void ruleOne(String c){
+        log.log(Level.INFO, String.valueOf("ruleOne"));
+        return;
+    }
+    // ========== NONE ==========
+    // ========== @{_dateRegistered} ==========
+    @Rule("ruleOne")
+    @Where("$i==$c")
+    public void ruleOne(String c){
+        log.log(Level.INFO, String.valueOf("ruleOne"));
+        return;
+    }
+// @{_next}
 
     // end of custom code
 
