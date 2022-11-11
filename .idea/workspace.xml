@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3f3e613e-204d-4164-9adf-9c980d7ddbfb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adel/modularruleengine/ModularRuleEngineApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adel/modularruleengine/config/Configs.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adel/modularruleengine/controller/EvreteRuleController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adel/modularruleengine/dto/InvoiceDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adel/modularruleengine/model/Customer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adel/modularruleengine/model/Invoice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adel/modularruleengine/model/MessageCarrier.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adel/modularruleengine/repository/CustomerRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adel/modularruleengine/repository/InvoiceRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adel/modularruleengine/service/CustomSpringEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adel/modularruleengine/service/CustomSpringEventListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adel/modularruleengine/service/CustomSpringEventPublisher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adel/modularruleengine/service/DaoService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adel/modularruleengine/service/EvreteService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/rule1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ruleTemplate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/adel/modularruleengine/ModularRuleEngineApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KubernetesApiPersistence">
+    <option name="context" value="minikube" />
+  </component>
+  <component name="ProjectId" id="2HPVTMxa7uVo8KOpoFHYRChhW0a" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3f3e613e-204d-4164-9adf-9c980d7ddbfb" name="Default Changelist" comment="" />
+      <created>1668186722769</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1668186722769</updated>
+      <workItem from="1668186732275" duration="5000" />
+    </task>
+    <servers />
+  </component>
+</project>
