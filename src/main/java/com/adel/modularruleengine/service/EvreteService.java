@@ -7,9 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.evrete.KnowledgeService;
 import org.evrete.api.Knowledge;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 @Component
 @Slf4j

@@ -7,21 +7,21 @@ import com.adel.modularruleengine.service.DaoService;
 import com.adel.modularruleengine.service.EvreteService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StopWatch;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @RestController
 @AllArgsConstructor
 @Slf4j
-@RequestMapping("/api/v1/rule1")
+@RequestMapping("/api/v1")
 public class EvreteRuleController {
 
     private final DaoService daoService;
@@ -33,16 +33,38 @@ public class EvreteRuleController {
         return daoService.saveInvoice(invoiceDto);
     }
 
-    @GetMapping
-    public List<Customer> executeRule1(){
+    @PostMapping("/random/{val}")
+    public List<Long> addRandom(@PathVariable("val") final Integer val){
+
+        final Stream<Integer> vals = IntStream.range(0, val).boxed();
+        return vals.parallel().mapToLong(i->{
+            final InvoiceDto invoiceDto = InvoiceDto.builder()
+                    .customerName(UUID.randomUUID().toString())
+                    .amount(BigDecimal.TEN)
+                    .build();
+            log.info("Add new Invoice :"+invoiceDto);
+
+            return daoService.saveInvoice(invoiceDto);
+        }).boxed().collect(Collectors.toList());
+
+    }
+
+    @GetMapping("/rule1")
+    public List<Customer> executeRule1() throws ExecutionException, InterruptedException {
+
+        final StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+
         log.info("Execute rule 1");
 
         final Collection<Object> sessionData = new ArrayList<>();
-        final List<Invoice> allIUnprocessedInvoices = daoService.getAllIUnprocessedInvoices();
-        final List<Customer> allCustomers = daoService.getAllCustomer();
+        final CompletableFuture<List<Invoice>> allIUnprocessedInvoices = CompletableFuture.supplyAsync(() ->  daoService.getAllIUnprocessedInvoices());
+        final CompletableFuture<List<Customer>> allCustomers = CompletableFuture.supplyAsync(() -> daoService.getAllCustomer());
 
-        sessionData.addAll(Arrays.asList(allIUnprocessedInvoices.toArray()));
-        sessionData.addAll(Arrays.asList(allCustomers.toArray()));
+        CompletableFuture.allOf(allIUnprocessedInvoices, allCustomers);
+
+        sessionData.addAll(Arrays.asList(allIUnprocessedInvoices.get().toArray()));
+        sessionData.addAll(Arrays.asList(allCustomers.get().toArray()));
 
         evreteService.rule1()
                 .newStatelessSession()
@@ -61,6 +83,8 @@ public class EvreteRuleController {
                                     .map(m->(Invoice) m)
                                     .collect(Collectors.toList()));
 
+        stopWatch.stop();
+        log.info("Stopwatch(sec): "+stopWatch.getTotalTimeSeconds());
         return daoService.getAllCustomer();
     }
 

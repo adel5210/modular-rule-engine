@@ -1,6 +1,7 @@
 package com.adel.modularruleengine.model;
 
 import lombok.*;
+import org.hibernate.annotations.OptimisticLocking;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 @ToString
 @Setter
 @Entity
+@OptimisticLocking
 public class Customer {
 
     @Id
