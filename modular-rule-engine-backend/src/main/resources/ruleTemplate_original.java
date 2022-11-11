@@ -24,6 +24,7 @@ public class ruleTemplate {
 
     /*
     // @{_startMethod}
+    // --> START_@{ruleMethodName}
     // ========== @{ruleDescription} ==========
     // ========== @{_dateRegistered} ==========
     @Rule("@{ruleName}")
@@ -32,6 +33,7 @@ public class ruleTemplate {
         log.log(Level.INFO, String.valueOf("@{ruleMethodName}"));
         @{statement}
     }
+    // -->  END_@{ruleMethodName}
     // @{_endMethod}
     */
 
