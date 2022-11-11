@@ -18,11 +18,13 @@ public class ruleTemplate {
     // start of custom code
 
     @{startMethod}
+    // ========== @{ruleDescription} ==========
     @Rule("@{ruleName}")
     @Where("@{where}")
     public void @{ruleMethodName}(@{conditions}){
         @{statement}
     }
+
     @{endMethod}
 
     // end of custom code
