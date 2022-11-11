@@ -3,6 +3,8 @@ package com.adel.modularruleengine.controller;
 import com.adel.modularruleengine.dto.InvoiceDto;
 import com.adel.modularruleengine.model.Customer;
 import com.adel.modularruleengine.model.Invoice;
+import com.adel.modularruleengine.model.MessageCarrier;
+import com.adel.modularruleengine.service.CustomSpringEventPublisher;
 import com.adel.modularruleengine.service.DaoService;
 import com.adel.modularruleengine.service.EvreteService;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.random.RandomGenerator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -27,6 +30,7 @@ public class EvreteRuleController {
 
     private final DaoService daoService;
     private final EvreteService evreteService;
+    private final CustomSpringEventPublisher customSpringEventPublisher;
 
     @PostMapping
     public Long addInvoice(final InvoiceDto invoiceDto){
@@ -38,10 +42,10 @@ public class EvreteRuleController {
     public List<Long> addRandom(@PathVariable("val") final Integer val){
 
         final Stream<Integer> vals = IntStream.range(0, val).boxed();
-        return vals.parallel().mapToLong(i->{
+        return vals.sequential().mapToLong(i->{
             final InvoiceDto invoiceDto = InvoiceDto.builder()
-                    .customerName(UUID.randomUUID().toString())
-                    .amount(BigDecimal.TEN)
+                    .customerName("Customer A")
+                    .amount(BigDecimal.valueOf(Math.random()*100))
                     .build();
             log.info("Add new Invoice :"+invoiceDto);
 
@@ -94,5 +98,13 @@ public class EvreteRuleController {
         log.info("Stopwatch(sec): "+stopWatch.getTotalTimeSeconds());
         return daoService.getAllCustomer();
     }
+
+    @PostMapping("/publishevent")
+    public void publishEvent(){
+        customSpringEventPublisher.publishEvent(MessageCarrier.builder()
+                .message("TEST")
+                .build());
+    }
+
 
 }
