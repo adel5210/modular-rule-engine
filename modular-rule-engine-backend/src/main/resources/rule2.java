@@ -38,7 +38,7 @@ public class ruleTemplate {
 
     // --> START_String
     // ========== String ==========
-    // ========== 2022-11-11T23:09:51.532761199 ==========
+    // ========== 2022-11-12T21:07:19.289737554 ==========
     @Rule("String")
     @Where("String")
     public void String(String){

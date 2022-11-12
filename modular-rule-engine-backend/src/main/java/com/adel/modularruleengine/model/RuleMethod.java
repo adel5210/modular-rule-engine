@@ -22,4 +22,6 @@ public class RuleMethod {
     @ManyToOne
     private Rule rule;
 
+    private String methodName;
+
 }

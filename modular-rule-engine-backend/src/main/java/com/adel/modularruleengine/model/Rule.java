@@ -20,7 +20,7 @@ public class Rule {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String name;
+    private String ruleName;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "rule")
     private List<RuleMethod> methods;
