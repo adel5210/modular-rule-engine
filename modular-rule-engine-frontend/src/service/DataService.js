@@ -2,9 +2,7 @@ import http from "../http-common";
 
 class DataService{
     addRule(data){
-        return http.post("/customers", data, {
-            headers: authHeader()
-        });
+        return http.post("/customers", data);
     }
 }
 
