@@ -3,8 +3,12 @@ package com.adel.modularruleengine.service;
 import com.adel.modularruleengine.dto.InvoiceDto;
 import com.adel.modularruleengine.model.Customer;
 import com.adel.modularruleengine.model.Invoice;
+import com.adel.modularruleengine.model.RulesGroup;
+import com.adel.modularruleengine.model.RulesMethod;
 import com.adel.modularruleengine.repository.CustomerRepository;
 import com.adel.modularruleengine.repository.InvoiceRepository;
+import com.adel.modularruleengine.repository.RuleMethodRepository;
+import com.adel.modularruleengine.repository.RuleRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +23,23 @@ import java.util.Optional;
 public class DaoService {
     private final CustomerRepository customerRepository;
     private final InvoiceRepository invoiceRepository;
+    private final RuleRepository ruleRepository;
+    private final RuleMethodRepository ruleMethodRepository;
+
+    @Transactional(readOnly = true)
+    public RulesGroup getGroupName(final String ruleName){
+        return ruleRepository.findByName(ruleName);
+    }
+
+    @Transactional
+    public RulesGroup saveRule(final RulesGroup rulesGroup){
+        return ruleRepository.save(rulesGroup);
+    }
+
+    @Transactional
+    public RulesMethod saveMethod(final RulesMethod rulesMethod){
+        return ruleMethodRepository.save(rulesMethod);
+    }
 
     @Transactional
     public Long saveInvoice(final InvoiceDto invoiceDto){

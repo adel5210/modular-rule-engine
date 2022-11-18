@@ -1,38 +1,31 @@
 package com.adel.modularruleengine.service;
 
-import com.adel.modularruleengine.dto.RuleAttributes;
+import com.adel.modularruleengine.config.PropertyConfig;
+import com.adel.modularruleengine.model.RuleAttributes;
 import com.adel.modularruleengine.utility.ResourceUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.util.FileUtil;
-import org.springframework.data.util.Pair;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-@Component
+import static com.adel.modularruleengine.model.RuleAttributeType.*;
+
+@Service
 @AllArgsConstructor
 @Slf4j
-public class FileService {
+public class FileRuleService {
 
-    public void addNewRule(RuleAttributes ruleAttributes) throws IOException {
+    private final PropertyConfig propertyConfig;
+
+    public void writeToRule(RuleAttributes ruleAttributes, String ruleFile) throws IOException {
         ruleAttributes.set_dateRegistered(LocalDateTime.now().toString());
 
-        final List<String> codeLines = ResourceUtil.readAllLine("/home/pc7/IdeaProjects/modular-rule-engine/modular-rule-engine-backend/src/main/resources/ruleTemplate.java");
+        final List<String> codeLines = ResourceUtil.readAllLine(propertyConfig.getRuleTemplate());
 
         final Map<String, Object> fields = ResourceUtil.getFieldsAndValues(ruleAttributes);
 
@@ -40,9 +33,9 @@ public class FileService {
         final List<String> portionCode = new ArrayList<>();
         boolean isPortionCode = false;
 
-        final String startMethod = "@{_startMethod}";
-        final String endMethod = "@{_endMethod}";
-        final String next = "@{_next}";
+        final String startMethod = START_METHOD.getProperty();
+        final String endMethod = END_METHOD.getProperty();
+        final String next = NEXT.getProperty();
 
         for (String line : codeLines) {
             final String originalLine = line;
@@ -56,7 +49,7 @@ public class FileService {
                     break;
                 }
 
-                final String wrapField = "@{" + field.getKey() + "}";
+                final String wrapField = getWrap(field.getKey());
                 if (line.contains(wrapField) ) {
                     line = line.replace(wrapField, field.getValue().toString());
                 }
@@ -80,7 +73,7 @@ public class FileService {
             }
         }
 
-        ResourceUtil.writeAllLines(newCodeLine, "/home/pc7/IdeaProjects/modular-rule-engine/modular-rule-engine-backend/src/main/resources/rule2.java");
+        ResourceUtil.writeAllLines(newCodeLine, ruleFile);
 
 
     }

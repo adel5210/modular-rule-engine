@@ -1,6 +1,6 @@
 package com.adel.modularruleengine.utility;
 
-import com.adel.modularruleengine.dto.RuleAttributes;
+import com.adel.modularruleengine.model.RuleAttributes;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.util.FileUtil;
 import org.springframework.data.util.Pair;

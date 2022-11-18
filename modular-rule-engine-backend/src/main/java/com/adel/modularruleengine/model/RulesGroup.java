@@ -4,24 +4,27 @@ import lombok.*;
 import org.hibernate.annotations.OptimisticLocking;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
 @Setter
 @Entity
 @OptimisticLocking
-public class RuleMethod {
+public class RulesGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id",nullable = false)
     private Long id;
 
-    @ManyToOne
-    private Rule rule;
+    @Column(unique = true)
+    private String groupName;
 
-    private String methodName;
+    @Builder.Default
+    @OneToMany(mappedBy = "rulesGroup")
+    private List<RulesMethod> methods = new ArrayList<>();
 
 }

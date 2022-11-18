@@ -1,4 +1,4 @@
-package com.adel.modularruleengine.dto;
+package com.adel.modularruleengine.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +10,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RuleAttributes {
+
+    /**
+     * must align with RuleAttributeTypes
+     */
 
     private String ruleName;
     private String where;
