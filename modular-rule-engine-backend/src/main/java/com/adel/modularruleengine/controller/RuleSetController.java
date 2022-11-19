@@ -1,13 +1,16 @@
 package com.adel.modularruleengine.controller;
 
+import com.adel.modularruleengine.dto.RulesGroupDto;
 import com.adel.modularruleengine.model.*;
 import com.adel.modularruleengine.service.DaoService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -35,7 +38,7 @@ public class RuleSetController {
         final RulesMethod.RulesMethodBuilder rulesMethodBuilder = RulesMethod.builder()
                 .rulesGroup(rulesGroup)
                 .methodName(ruleAttributes.getRuleMethodName())
-                .dateRegistered(LocalDate.now())
+                .dateTimeRegistered(LocalDateTime.now())
                 .ruleDescription(ruleAttributes.getRuleDescription())
                 .parameters(ruleAttributes.getParameters())
                 .whereSet(ruleAttributes.getWhere())
@@ -56,6 +59,14 @@ public class RuleSetController {
         }
 
         return new Response(HttpStatus.CREATED.name(), "Rule updated success", new HashMap<>());
+    }
+
+    @GetMapping
+    public @ResponseBody Page<RulesGroupDto> getAllRuleGroup(Integer page,
+                                                             Integer size){
+        page = Optional.ofNullable(page).orElse(0);
+        size = Optional.ofNullable(size).orElse(15);
+        return daoService.getAllRuleGroup(page, size);
     }
 
 }

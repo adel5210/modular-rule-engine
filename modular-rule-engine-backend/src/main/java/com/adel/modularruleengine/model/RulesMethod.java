@@ -5,6 +5,7 @@ import org.hibernate.annotations.OptimisticLocking;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
@@ -34,6 +35,6 @@ public class RulesMethod {
 
     private String statement;
 
-    private LocalDate dateRegistered;
+    private LocalDateTime dateTimeRegistered;
 
 }
