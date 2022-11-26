@@ -1,11 +1,11 @@
 version: '1'
 services:
-  run-spring:
-    container_name: run-spring
+  rule-spring:
+    container_name: rule-spring
     build:
       context: .
       dockerfile: Dockerfile
-    image: run-spring:latest
+    image: rule-spring:latest
     ports:
       - 8080:8080
     networks:
